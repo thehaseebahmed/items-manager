@@ -1,0 +1,19 @@
+<div class="container">
+  <div id="app-name">
+    <h1>Item Manager</h1>
+    <h4>by Haseeb Ahmed</h4>
+  </div>
+  <div id="nav-bar">
+    <span
+      class="nav-bar-icon icon icon-heart icon-lg icon-clickable"
+      (click)="onFavoritesBtnClick()"
+    ></span>
+  </div>
+  <div class="seperator"></div>
+
+  <router-outlet></router-outlet>
+</div>
+
+<wp-modal [(isOpen)]="modalOpened">
+  <wp-my-favorites></wp-my-favorites>
+</wp-modal>

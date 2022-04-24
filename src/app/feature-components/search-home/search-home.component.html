@@ -1,0 +1,32 @@
+<div *ngIf="results$ | async as results">
+  <div class="search">
+    <div class="search-bar">
+      <wp-search-bar (searchText)="onSearch($event)"></wp-search-bar>
+    </div>
+    <div class="search-dropdown">
+      <wp-sort-dropdown
+        *ngIf="results.length > 0"
+        [sortBy]="sortBy"
+        (onSort)="onSortBy($event)"
+      ></wp-sort-dropdown>
+    </div>
+  </div>
+  <br />
+  <div *ngIf="results.length < 1" class="no-results">
+    <p>Oops! We couldn't find what you were looking for 😿</p>
+  </div>
+  <div *ngIf="results.length > 0">
+    <div class="list">
+      <ul>
+        <li *ngFor="let item of results | slice: 0:loadedItems">
+          <wp-item [item]="item"></wp-item>
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="loadedItems < results.length" class="list-cta">
+      <button class="btn btn-lg" type="button" (click)="onLoadMoreBtnClick()">
+        Load More
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<!-- The Modal -->
+<div class="modal" *ngIf="isOpen">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="close">
+      <span class="icon icon-close icon-clickable icon-md" (click)="closeModal($event, true)"> </span>
+    </div>
+    <ng-content></ng-content>
+  </div>
+</div>

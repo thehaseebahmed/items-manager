@@ -1,0 +1,18 @@
+<h2>My Favorite Items</h2>
+<div *ngIf="!hasFavorites">
+  <p>Oops! You do not have any favorite items yet ☹️</p>
+</div>
+<div *ngIf="hasFavorites">
+  <wp-search-bar
+    [enableAdvancedSearch]="enabledAdvanceSearchInModal"
+    (search)="onSearch($event)"
+  ></wp-search-bar>
+
+  <div class="my-favorite-items">
+    <ul>
+      <li *ngFor="let item of favorites">
+        <wp-item [compactMode]="true" [item]="item"></wp-item>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+@import "..\..\..\styles\variables.less";
+
+h2 {
+  margin-top: 0;
+}
+
+.my-favorite-items {
+  padding-top: 1rem;
+
+  ul {
+    column-gap: 0.5rem;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    row-gap: 0.5rem;
+
+    li {
+      border: 1px solid @border-color;
+      border-radius: @border-radius;
+      padding: 1rem 0.5rem;
+    }
+  }
+}
+
+@media screen and (min-width: @screen-md) {
+  .my-favorite-items {
+    ul {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
+
+@media screen and (min-width: @screen-lg) {
+  .my-favorite-items {
+    ul {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}
+
+@media screen and (min-width: @screen-xl) {
+  .my-favorite-items {
+    ul {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+}

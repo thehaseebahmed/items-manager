@@ -1,0 +1,26 @@
+<div class="dropdown">
+  <input type="checkbox" id="dropdown" />
+
+  <label class="dropdown__face" for="dropdown">
+    <div class="dropdown__text">Sort by</div>
+
+    <div class="dropdown__arrow"></div>
+  </label>
+
+  <ul class="dropdown__items">
+    <li *ngFor="let item of sortBy" (click)="onSortBy(item.value)">
+      <div class="dropdown__items__title">
+        {{ item.displayText }}
+      </div>
+      <div class="dropdown__items__sort">
+        <span
+          class="icon-clickable icon-sm"
+          [ngClass]="{
+            'icon-arrow-down': sortType.asc == item.type,
+            'icon-arrow-up': sortType.dsc == item.type
+          }"
+        ></span>
+      </div>
+    </li>
+  </ul>
+</div>

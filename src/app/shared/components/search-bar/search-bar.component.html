@@ -1,0 +1,67 @@
+<form class="search-bar-container" (submit)="onSearchBtnClick()">
+  <div *ngIf="!isAdvancedSearch" class="search-bar">
+    <div class="search-bar-input">
+      <input
+        name="search-criteria"
+        type="search"
+        placeholder="Search..."
+        [(ngModel)]="this.searchCriteria[0].value"
+        (input)="this.onSearchInput($event)"
+      />
+    </div>
+    <div *ngIf="enableAdvancedSearch" class="adv-search-icon">
+      <button type="button" (click)="toggleAdvSearch()">
+        <span class="icon icon-dots-v icon-clickable icon-lg"></span>
+      </button>
+    </div>
+  </div>
+  <div *ngIf="isAdvancedSearch" class="adv-search">
+    <div class="adv-search-header">
+      <div class="adv-search-title">Advanced Search</div>
+      <div class="adv-search-add" (click)="onAddCriteriaIconClick()">
+        <span class="icon icon-plus icon-clickable icon-md"></span>
+      </div>
+    </div>
+    <div *ngIf="!hasSearchCriteria" class="adv-search-body">
+      <p>Click on the "+" icon to add a new search criteria.</p>
+    </div>
+    <div *ngIf="hasSearchCriteria" class="adv-search-body">
+      <div
+        *ngFor="let criteria of searchCriteria; let i = index"
+        class="adv-search-criteria"
+      >
+        <select
+          [id]="'adv-search-criteria-' + i"
+          [name]="'adv-search-criteria-' + i"
+          [(ngModel)]="criteria.key"
+        >
+          <option value="undefined" disabled>Select...</option>
+          <option
+            *ngFor="let key of criteriaKeys"
+            [ngValue]="key.value"
+            [selected]="criteria.key == key.value"
+          >
+            {{ key.displayText }}
+          </option>
+        </select>
+        <input
+          type="text"
+          [name]="'search-criteria-' + i"
+          [(ngModel)]="criteria.value"
+        />
+        <div
+          class="adv-search-criteria-remove"
+          (click)="onRemoveCriteriaIconClick(i)"
+        >
+          <span class="icon icon-trash icon-clickable icon-md"> </span>
+        </div>
+      </div>
+    </div>
+    <div class="adv-search-footer">
+      <button class="btn" type="submit">Search</button>
+      <button class="btn btn-light" type="button" (click)="toggleAdvSearch()">
+        Cancel
+      </button>
+    </div>
+  </div>
+</form>

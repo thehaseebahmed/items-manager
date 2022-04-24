@@ -1,0 +1,23 @@
+<div *ngIf="item" [ngClass]="{ compact: compactMode }" class="item">
+  <div class="item-img img-placeholder" [wpLazyImg]="item.image"></div>
+  <div class="item-details">
+    <span class="item-title">{{ item.title }}</span>
+    <span *ngIf="!compactMode" class="item-email">{{ item.email }}</span>
+    <span *ngIf="!compactMode" class="item-price">EUR {{ item.price }}/-</span>
+    <div class="item-cta">
+      <span
+        *ngIf="!isFavorite"
+        class="icon icon-heart icon-clickable icon-md"
+        (click)="onAddFavoritesBtnClick()"
+      ></span>
+      <span
+        *ngIf="isFavorite"
+        class="icon icon-heart-solid icon-clickable icon-md"
+        (click)="onRemoveFavoritesBtnClick()"
+      ></span>
+    </div>
+  </div>
+  <div *ngIf="!compactMode" class="item-description">
+    {{ item.description }}
+  </div>
+</div>
