@@ -38,7 +38,10 @@ module.exports = function (config) {
         { type: "text-summary" },
       ],
     },
-    reporters: ["progress", "kjhtml"],
+    junitReporter: {
+      outputDir: "./junit",
+    },
+    reporters: ["progress", "kjhtml", "junit"],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
