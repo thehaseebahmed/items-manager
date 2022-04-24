@@ -4,35 +4,41 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
-- main
+  - main
 
 pool:
   vmImage: ubuntu-latest
 
 steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '16.x'
-  displayName: 'Install Node.js'
+  - task: NodeTool@0
+    inputs:
+      versionSpec: "16.x"
+    displayName: "Install Node.js"
 
-- script: |
-    npm install -g @angular/cli
-    npm install
-    npm run build -- --prod --base-href $(base-href)
-  displayName: 'npm install and build'
+  - script: |
+      npm install -g @angular/cli
+      npm install
+      npm run build -- --prod --base-href $(base-href)
+    displayName: "npm install and build"
 
-- script: |
-    npm run test -- --no-watch
-  displayName: 'npm test'
+  - script: |
+      npm run test -- --no-watch
+    displayName: "npm test"
 
-- task: PublishTestResults@2
-  inputs:
-    testResultsFormat: 'JUnit'
-    testResultsFiles: '**/TEST-*.xml'
-    failTaskOnFailedTests: true
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFormat: "JUnit"
+      testResultsFiles: "**/TESTS-*.xml"
+      failTaskOnFailedTests: true
 
-- task: PublishCodeCoverageResults@1
-  inputs:
-    codeCoverageTool: 'Cobertura'
-    summaryFileLocation: '$(Build.SourcesDirectory)/coverage/**/cobertura-coverage.xml'
-    failIfCoverageEmpty: true
+  - task: PublishCodeCoverageResults@1
+    inputs:
+      codeCoverageTool: "Cobertura"
+      summaryFileLocation: "$(Build.SourcesDirectory)/coverage/**/cobertura-coverage.xml"
+      failIfCoverageEmpty: true
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: "$(Build.Repository.LocalPath)/dist"
+      ArtifactName: "drop"
+      publishLocation: "Container"
