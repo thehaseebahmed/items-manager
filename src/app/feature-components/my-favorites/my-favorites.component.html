@@ -5,7 +5,7 @@
 <div *ngIf="hasFavorites">
   <wp-search-bar
     [enableAdvancedSearch]="enabledAdvanceSearchInModal"
-    (search)="onSearch($event)"
+    (searchText)="onSearch($event)"
   ></wp-search-bar>
 
   <div class="my-favorite-items">

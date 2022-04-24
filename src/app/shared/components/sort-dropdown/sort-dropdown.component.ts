@@ -11,6 +11,7 @@ export class SortDropdownComponent implements OnInit {
   @Input() sortBy?: IDropdownItem[];
   @Output() onSort: EventEmitter<ISortEvent> = new EventEmitter<ISortEvent>();
 
+  public isOpen: boolean = false;
   public readonly sortType = SortTypeEnum;
 
   constructor() {}
@@ -32,5 +33,7 @@ export class SortDropdownComponent implements OnInit {
         i.type = undefined;
       }
     }
+
+    this.isOpen = false;
   }
 }

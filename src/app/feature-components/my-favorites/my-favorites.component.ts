@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable, Subject, takeUntil, tap } from 'rxjs';
 import { IItemModel } from 'src/app/core/models/item.model';
@@ -13,7 +13,7 @@ import { ItemsState } from 'src/app/core/states/items.state';
   templateUrl: './my-favorites.component.html',
   styleUrls: ['./my-favorites.component.less'],
 })
-export class MyFavoritesComponent implements OnInit, OnDestroy {
+export class MyFavoritesComponent implements OnInit, OnDestroy, AfterViewInit {
   public readonly enabledAdvanceSearchInModal: boolean = false;
   public favorites: IItemModel[] = [];
   public hasFavorites: boolean = false;
@@ -23,7 +23,12 @@ export class MyFavoritesComponent implements OnInit, OnDestroy {
 
   constructor(private _searchSvc: SearchService, private _store: Store) {}
 
+  ngAfterViewInit(): void {
+    console.log("MyFavoritesComponent ngAfterViewInit()");
+  }
+
   ngOnDestroy(): void {
+    console.log("MyFavoritesComponent ngOnDestroy()");
     this._destroy$.next(true);
   }
 
@@ -35,6 +40,8 @@ export class MyFavoritesComponent implements OnInit, OnDestroy {
         takeUntil(this._destroy$)
       )
       .subscribe(() => this.onSearch(this._lastQuery));
+
+      console.log("MyFavoritesComponent ngOnInit()");
   }
 
   public onSearch(query: SearchQuery) {

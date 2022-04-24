@@ -8,7 +8,7 @@
   <h2 align="center">Technical Test for Wallapop Sr. Frontend Engineer</h3>
 
   <p align="center">
-    <a href="http://demos.thehaseebahmed.com/wp-items-manager">View Demo</a>
+    <a href="http://demos.thehaseebahmed.com/items-manager">View Demo</a>
   </p>
   <br />
 </div>
